@@ -68,4 +68,18 @@ public class QuantityTest {
         Quantity twoTsp = new Quantity(2, Unit.TSP);
         assertEquals(fourInches, twoInches.add(twoTsp));
     }
+
+    @Test
+    public void oneHundredCelsiusShouldEqual212Fahrenheit() {
+        Quantity oneHundredCelsius = new Quantity(100, Unit.CELSIUS);
+        Quantity twoHundredTwelveFahrenheit = new Quantity(212, Unit.FAHRENHEIT);
+        assertEquals(oneHundredCelsius, twoHundredTwelveFahrenheit);
+    }
+
+    @Test
+    public void zeroCelsiusShouldEqual32Fahrenheit() {
+        Quantity zeroCelsius = new Quantity(0, Unit.CELSIUS);
+        Quantity thirtyTwoFahrenheit = new Quantity(32, Unit.FAHRENHEIT);
+        assertEquals(thirtyTwoFahrenheit, zeroCelsius);
+    }
 }
