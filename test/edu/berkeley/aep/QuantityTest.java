@@ -3,6 +3,7 @@ package edu.berkeley.aep;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class QuantityTest {
     @Test
@@ -86,5 +87,12 @@ public class QuantityTest {
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotBeAbleToCreateAnArithmeticQuantityWithATemperature() {
         ArithmeticQuantity boo = new ArithmeticQuantity(0, Unit.CELSIUS);
+    }
+
+    @Test
+    public void twoFeetShouldBeBetterThanFiveInches() {
+        ScalarQuantity twoFeet = new ScalarQuantity(2, Unit.FEET);
+        ScalarQuantity fiveInches = new ScalarQuantity(5, Unit.INCHES);
+        assertTrue(twoFeet.betterThan(fiveInches));
     }
 }
