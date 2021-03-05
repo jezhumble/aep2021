@@ -7,79 +7,84 @@ import static org.junit.Assert.assertEquals;
 public class QuantityTest {
     @Test
     public void oneFootShouldEqualTwelveInches() {
-        Quantity oneFoot = new Quantity(1, Unit.FEET);
-        Quantity twelveInches = new Quantity(12, Unit.INCHES);
+        ArithmeticQuantity oneFoot = new ArithmeticQuantity(1, Unit.FEET);
+        ArithmeticQuantity twelveInches = new ArithmeticQuantity(12, Unit.INCHES);
         assertEquals(twelveInches, oneFoot);
     }
 
     @Test
     public void threeFeetShouldEqualOneYard() {
-        Quantity threeFeet = new Quantity(3, Unit.FEET);
-        Quantity oneYard = new Quantity(1, Unit.YARDS);
+        ArithmeticQuantity threeFeet = new ArithmeticQuantity(3, Unit.FEET);
+        ArithmeticQuantity oneYard = new ArithmeticQuantity(1, Unit.YARDS);
         assertEquals(oneYard, threeFeet);
     }
     
     @Test
     public void oneMileShouldEqual1760Feet() {
-        Quantity oneMile = new Quantity(1, Unit.MILES);
-        Quantity one760Feet = new Quantity(1760, Unit.YARDS);
+        ArithmeticQuantity oneMile = new ArithmeticQuantity(1, Unit.MILES);
+        ArithmeticQuantity one760Feet = new ArithmeticQuantity(1760, Unit.YARDS);
         assertEquals(oneMile, one760Feet);
     }
 
     @Test
     public void oneTbspShouldEqualThreeTsp() {
-        Quantity oneTbsp = new Quantity(1, Unit.TBSP);
-        Quantity threeTsp = new Quantity(3, Unit.TSP);
+        ArithmeticQuantity oneTbsp = new ArithmeticQuantity(1, Unit.TBSP);
+        ArithmeticQuantity threeTsp = new ArithmeticQuantity(3, Unit.TSP);
         assertEquals(oneTbsp, threeTsp);
     }
 
     @Test
     public void oneOzShouldEqualTwoTbsp() {
-        Quantity oneOz = new Quantity(1, Unit.OZ);
-        Quantity twoTbsp = new Quantity(2, Unit.TBSP);
+        ArithmeticQuantity oneOz = new ArithmeticQuantity(1, Unit.OZ);
+        ArithmeticQuantity twoTbsp = new ArithmeticQuantity(2, Unit.TBSP);
         assertEquals(oneOz, twoTbsp);
     }
 
     @Test
     public void eightOzShouldEqualOneCup() {
-        Quantity eightOz = new Quantity(8, Unit.OZ);
-        Quantity oneCup = new Quantity(1, Unit.CUP);
+        ArithmeticQuantity eightOz = new ArithmeticQuantity(8, Unit.OZ);
+        ArithmeticQuantity oneCup = new ArithmeticQuantity(1, Unit.CUP);
         assertEquals(eightOz, oneCup);
     }
 
     @Test
     public void twoInchesPlusTwoInchesShouldEqualFourInches() {
-        Quantity fourInches = new Quantity(4, Unit.INCHES);
-        Quantity twoInches = new Quantity(2, Unit.INCHES);
+        ArithmeticQuantity fourInches = new ArithmeticQuantity(4, Unit.INCHES);
+        ArithmeticQuantity twoInches = new ArithmeticQuantity(2, Unit.INCHES);
         assertEquals(fourInches, twoInches.add(twoInches));
     }
 
     @Test
     public void twoTbspPlusOneOzShouldEqual12Tsp() {
-        Quantity twoTbsp = new Quantity(2, Unit.TBSP);
-        Quantity oneOz = new Quantity(1, Unit.OZ);
-        assertEquals(new Quantity(12, Unit.TSP), oneOz.add(twoTbsp));
+        ArithmeticQuantity twoTbsp = new ArithmeticQuantity(2, Unit.TBSP);
+        ArithmeticQuantity oneOz = new ArithmeticQuantity(1, Unit.OZ);
+        assertEquals(new ArithmeticQuantity(12, Unit.TSP), oneOz.add(twoTbsp));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void twoInchesPlusTwoTspShouldNotEqualFourInches() {
-        Quantity fourInches = new Quantity(4, Unit.INCHES);
-        Quantity twoInches = new Quantity(2, Unit.INCHES);
-        Quantity twoTsp = new Quantity(2, Unit.TSP);
+        ArithmeticQuantity fourInches = new ArithmeticQuantity(4, Unit.INCHES);
+        ArithmeticQuantity twoInches = new ArithmeticQuantity(2, Unit.INCHES);
+        ArithmeticQuantity twoTsp = new ArithmeticQuantity(2, Unit.TSP);
         assertEquals(fourInches, twoInches.add(twoTsp));
     }
 
     @Test
     public void oneHundredCelsiusShouldEqual212Fahrenheit() {
-        Quantity oneHundredCelsius = new Quantity(100, Unit.CELSIUS);
-        Quantity twoHundredTwelveFahrenheit = new Quantity(212, Unit.FAHRENHEIT);
+        ScalarQuantity oneHundredCelsius = new ScalarQuantity(100, Unit.CELSIUS);
+        ScalarQuantity twoHundredTwelveFahrenheit = new ScalarQuantity(212, Unit.FAHRENHEIT);
         assertEquals(oneHundredCelsius, twoHundredTwelveFahrenheit);
     }
 
     @Test
     public void zeroCelsiusShouldEqual32Fahrenheit() {
-        Quantity zeroCelsius = new Quantity(0, Unit.CELSIUS);
-        Quantity thirtyTwoFahrenheit = new Quantity(32, Unit.FAHRENHEIT);
+        ScalarQuantity zeroCelsius = new ScalarQuantity(0, Unit.CELSIUS);
+        ScalarQuantity thirtyTwoFahrenheit = new ScalarQuantity(32, Unit.FAHRENHEIT);
         assertEquals(thirtyTwoFahrenheit, zeroCelsius);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldNotBeAbleToCreateAnArithmeticQuantityWithATemperature() {
+        ArithmeticQuantity boo = new ArithmeticQuantity(0, Unit.CELSIUS);
     }
 }
