@@ -18,4 +18,13 @@ public class BesterTest {
     public void passingInEmptyArrayShouldThrowException() {
         new Bester();
     }
+
+    @Test
+    public void coinTossProbabilityShouldBeBetterThanDieRoll() {
+        var coinToss = new Chance(0.5);
+        var dieRoll = new Chance(1/6);
+        var bester = new Bester(coinToss, dieRoll);
+        assertEquals(coinToss, bester.best());
+    }
+
 }

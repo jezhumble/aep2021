@@ -1,7 +1,7 @@
 package edu.berkeley.aep;
 
 // Understands the likelihood of something happening
-public class Chance {
+public class Chance implements Bestable {
     private final double probability;
 
     public Chance(double probability) {
@@ -19,5 +19,11 @@ public class Chance {
     @Override
     public int hashCode() {
         return Double.hashCode(probability);
+    }
+
+    @Override
+    public boolean betterThan(Bestable other) {
+        Chance otherChance = (Chance) other;
+        return probability > otherChance.probability;
     }
 }
