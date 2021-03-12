@@ -11,7 +11,7 @@ public class BesterTest {
         var twelveFeet = new ScalarQuantity(12, Unit.FEET);
         var threeInches = new ScalarQuantity(3, Unit.INCHES);
         var bester = new Bester<ScalarQuantity>(fiveYards, twelveFeet, threeInches);
-        assertEquals(fiveYards, bester.best());
+        assertEquals(twelveFeet, bester.best());
     }
 
     @Test(expected = IllegalArgumentException.class)
