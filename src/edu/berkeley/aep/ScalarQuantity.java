@@ -1,7 +1,7 @@
 package edu.berkeley.aep;
 
 // Understands how to compare scalar amounts in different units
-public class ScalarQuantity implements Bestable {
+public class ScalarQuantity implements Bestable<ScalarQuantity> {
     protected final int amount;
     protected final Unit unit;
 
@@ -24,8 +24,7 @@ public class ScalarQuantity implements Bestable {
     }
 
     @Override
-    public boolean betterThan(Bestable other) {
-        ScalarQuantity otherQuantity = (ScalarQuantity) other;
-        return amount > unit.convert(otherQuantity.amount, otherQuantity.unit);
+    public boolean betterThan(ScalarQuantity other) {
+        return amount > unit.convert(other.amount, other.unit);
     }
 }

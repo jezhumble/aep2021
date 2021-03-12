@@ -10,7 +10,7 @@ public class BesterTest {
         var fiveYards = new ScalarQuantity(5, Unit.YARDS);
         var twelveFeet = new ScalarQuantity(12, Unit.FEET);
         var threeInches = new ScalarQuantity(3, Unit.INCHES);
-        var bester = new Bester(fiveYards, twelveFeet, threeInches);
+        var bester = new Bester<ScalarQuantity>(fiveYards, twelveFeet, threeInches);
         assertEquals(fiveYards, bester.best());
     }
 
@@ -19,12 +19,20 @@ public class BesterTest {
         new Bester();
     }
 
-    @Test
-    public void coinTossProbabilityShouldBeBetterThanDieRoll() {
-        var coinToss = new Chance(0.5);
-        var dieRoll = new Chance(1/6);
-        var bester = new Bester(coinToss, dieRoll);
-        assertEquals(coinToss, bester.best());
-    }
+//    @Test
+//    public void coinTossProbabilityShouldBeBetterThanDieRoll() {
+//        var coinToss = new Chance(0.5);
+//        var dieRoll = new Chance(1/6);
+//        var threeInches = new ScalarQuantity(3, Unit.INCHES);
+//        Bester<Chance> bester = new Bester<Chance>(coinToss, dieRoll, threeInches);
+//        assertEquals(coinToss, bester.best());
+//    }
 
+//    @Test
+//    public void shouldNotBeAbleToMixQuantitiesAndChances() {
+//        var coinToss = new Chance(0.5);
+//        var threeInches = new ScalarQuantity(3, Unit.INCHES);
+//        var bester = new Bester<Chance>(coinToss, threeInches);
+//        assertEquals(coinToss, bester.best());
+//    }
 }
