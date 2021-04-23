@@ -8,26 +8,14 @@ import java.util.Set;
 public class Airport {
 
     List<Airport> children = new ArrayList<>();
-    public static int UNREACHABLE = Integer.MAX_VALUE;
-
-    public boolean canReach(Airport destination) {
-        return canReach(destination, new HashSet<>());
-    }
-
-    private boolean canReach(Airport destination, Set<Airport> visited) {
-        if (!visited.add(this))
-            return false;
-        if (destination == this)
-            return true;
-        for (Airport child : children) {
-            if (child.canReach(destination, visited))
-                return true;
-        }
-        return false;
-    }
+    public static final int UNREACHABLE = Integer.MAX_VALUE;
 
     public void addChild(Airport child) {
         children.add(child);
+    }
+
+    public boolean canReach(Airport destination) {
+        return hopsTo(destination) != UNREACHABLE;
     }
 
     public int hopsTo(Airport destination) {
