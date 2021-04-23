@@ -25,6 +25,16 @@ public class AirportTest {
         c.addChild(e);
         d.addChild(e);
         e.addChild(b);
+
+        h.addRoute(new Route(b, 100));
+        b.addRoute(new Route(a, 50));
+        a.addRoute(new Route(f, 300));
+        b.addRoute(new Route(c, 400));
+        c.addRoute(new Route(e, 200));
+        c.addRoute(new Route(e, 400));
+        c.addRoute(new Route(d, 50));
+        d.addRoute(new Route(e, 100));
+        e.addRoute(new Route(b, 500));
     }
 
     @Test
@@ -76,5 +86,20 @@ public class AirportTest {
     @Test
     public void minHopCountFromCToBShouldBeTwo() {
         assertEquals(2, c.hopsTo(b));
+    }
+
+    @Test
+    public void minCostFromNodeToSelfShouldBeZero() {
+        assertEquals(0, h.costTo(h));
+    }
+
+    @Test
+    public void minCostFromHToBShouldBe100() {
+        assertEquals(100, h.costTo(b));
+    }
+
+    @Test
+    public void minCostFromBToEShouldBe550() {
+        assertEquals(550, b.costTo(e));
     }
 }
