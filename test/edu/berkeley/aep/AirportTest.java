@@ -2,8 +2,7 @@ package edu.berkeley.aep;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class AirportTest {
 
@@ -57,5 +56,20 @@ public class AirportTest {
     @Test
     public void airportBShouldNotBeAbleToReachG() {
         assertFalse(b.canReach(g));
+    }
+
+    @Test
+    public void hopsToSelfShouldBeZero() {
+        assertEquals(0, h.hopsTo(h));
+    }
+
+    @Test
+    public void hopsFromBToFShouldBeTwo() {
+        assertEquals(2, b.hopsTo(f));
+    }
+
+    @Test
+    public void gShouldBeUnreachableFromB() {
+        assertEquals(Airport.UNREACHABLE, b.hopsTo(g));
     }
 }
