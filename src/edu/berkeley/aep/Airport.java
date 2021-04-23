@@ -27,11 +27,13 @@ public class Airport {
             return UNREACHABLE;
         if (destination == this)
             return 0;
+        int minHops = UNREACHABLE;
         for (Airport child : children) {
-            int hops = child.hopsTo(destination, visited);
-            if (hops != UNREACHABLE)
-                return hops + 1;
+            int hops = child.hopsTo(destination, new HashSet<>(visited));
+            if (hops < minHops) {
+                minHops = hops + 1;
+            }
         }
-        return UNREACHABLE;
+        return minHops;
     }
 }

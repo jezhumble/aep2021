@@ -72,4 +72,9 @@ public class AirportTest {
     public void gShouldBeUnreachableFromB() {
         assertEquals(Airport.UNREACHABLE, b.hopsTo(g));
     }
+
+    @Test
+    public void minHopCountFromCToBShouldBeTwo() {
+        assertEquals(2, c.hopsTo(b));
+    }
 }
