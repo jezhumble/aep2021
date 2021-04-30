@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+// Understands routes to other airports
 public class Airport {
 
     List<Airport> children = new ArrayList<>();
@@ -27,16 +28,16 @@ public class Airport {
         return hopsTo(destination, new HashSet<>());
     }
 
-    private int hopsTo(Airport destination, Set<Airport> visited) {
+    protected int hopsTo(Airport destination, Set<Airport> visited) {
         if (!visited.add(this))
             return UNREACHABLE;
         if (destination == this)
             return 0;
         int minHops = UNREACHABLE;
-        for (Airport child : children) {
+        for (Route child : routes) {
             int hops = child.hopsTo(destination, new HashSet<>(visited));
             if (hops < minHops) {
-                minHops = hops + 1;
+                minHops = hops;
             }
         }
         return minHops;
@@ -51,13 +52,13 @@ public class Airport {
             return UNREACHABLE;
         if (destination == this)
             return 0;
-        int minHops = UNREACHABLE;
+        int minCost = UNREACHABLE;
         for (Route child : routes) {
-            int hops = child.costTo(destination, new HashSet<>(visited));
-            if (hops < minHops) {
-                minHops = hops;
+            int cost = child.costTo(destination, new HashSet<>(visited));
+            if (cost < minCost) {
+                minCost = cost;
             }
         }
-        return minHops;
+        return minCost;
     }
 }

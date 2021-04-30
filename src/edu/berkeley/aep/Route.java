@@ -2,6 +2,7 @@ package edu.berkeley.aep;
 
 import java.util.HashSet;
 
+// Understands a cost to a destination
 public class Route {
     private final Airport routeDestination;
     private final int routeCost;
@@ -16,5 +17,12 @@ public class Route {
         if (cost == Airport.UNREACHABLE)
             return cost;
         return cost + this.routeCost;
+    }
+
+    public int hopsTo(Airport destination, HashSet<Airport> visited) {
+        int cost = this.routeDestination.hopsTo(destination, visited);
+        if (cost == Airport.UNREACHABLE)
+            return cost;
+        return cost + 1;
     }
 }
