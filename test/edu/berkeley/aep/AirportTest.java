@@ -16,16 +16,6 @@ public class AirportTest {
     public static Airport h = new Airport();
 
     static {
-        h.addChild(b);
-        b.addChild(a);
-        a.addChild(f);
-        b.addChild(c);
-        c.addChild(d);
-        c.addChild(e);
-        c.addChild(e);
-        d.addChild(e);
-        e.addChild(b);
-
         h.addRoute(new Route(b, 100));
         b.addRoute(new Route(a, 50));
         a.addRoute(new Route(f, 300));

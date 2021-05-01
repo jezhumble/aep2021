@@ -8,12 +8,11 @@ import java.util.Set;
 // Understands routes to other airports
 public class Airport {
 
-    List<Airport> children = new ArrayList<>();
     List<Route> routes = new ArrayList<>();
     public static final int UNREACHABLE = Integer.MAX_VALUE;
 
     public void addChild(Airport child) {
-        children.add(child);
+        routes.add(new Route(child, 0));
     }
 
     public void addRoute(Route route) {
