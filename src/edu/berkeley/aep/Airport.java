@@ -24,36 +24,33 @@ public class Airport {
     }
 
     public int hopsTo(Airport destination) {
-        return hopsTo(destination, new HashSet<>());
-    }
-
-    protected int hopsTo(Airport destination, Set<Airport> visited) {
-        if (!visited.add(this))
-            return UNREACHABLE;
-        if (destination == this)
-            return 0;
-        int minHops = UNREACHABLE;
-        for (Route child : routes) {
-            int hops = child.hopsTo(destination, new HashSet<>(visited));
-            if (hops < minHops) {
-                minHops = hops;
+        CostCalculator hopsCalculator = new CostCalculator() {
+            @Override
+            public int calculate(int cost, int routeCost) {
+                return cost + 1;
             }
-        }
-        return minHops;
+        };
+        return costTo(destination, new HashSet<>(), hopsCalculator);
     }
 
     public int costTo(Airport destination) {
-        return costTo(destination, new HashSet<>());
+        CostCalculator costCalculator = new CostCalculator() {
+            @Override
+            public int calculate(int cost, int routeCost) {
+                return cost + routeCost;
+            }
+        };
+        return costTo(destination, new HashSet<>(), costCalculator);
     }
 
-    protected int costTo(Airport destination, Set<Airport> visited) {
+    protected int costTo(Airport destination, Set<Airport> visited, CostCalculator calculator) {
         if (!visited.add(this))
             return UNREACHABLE;
         if (destination == this)
             return 0;
         int minCost = UNREACHABLE;
         for (Route child : routes) {
-            int cost = child.costTo(destination, new HashSet<>(visited));
+            int cost = child.costTo(destination, new HashSet<>(visited), calculator);
             if (cost < minCost) {
                 minCost = cost;
             }

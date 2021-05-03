@@ -12,17 +12,10 @@ public class Route {
         this.routeCost = cost;
     }
 
-    public int costTo(Airport destination, HashSet<Airport> visited) {
-        int cost = this.routeDestination.costTo(destination, visited);
+    public int costTo(Airport destination, HashSet<Airport> visited, CostCalculator calculator) {
+        int cost = this.routeDestination.costTo(destination, visited, calculator);
         if (cost == Airport.UNREACHABLE)
             return cost;
-        return cost + this.routeCost;
-    }
-
-    public int hopsTo(Airport destination, HashSet<Airport> visited) {
-        int cost = this.routeDestination.hopsTo(destination, visited);
-        if (cost == Airport.UNREACHABLE)
-            return cost;
-        return cost + 1;
+        return calculator.calculate(cost, this.routeCost);
     }
 }
